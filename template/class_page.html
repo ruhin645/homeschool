@@ -1,0 +1,144 @@
+{% extends 'parent_class.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block head %}
+
+{% endblock %}
+
+{% block hamburger %}
+    <div class="jumbotron jumbotron-fluid class_jumbotron">
+        <div class="container">
+        <h1 class="display-4 class_title">{{ classroom.course_name }}</h1>
+        <p class="lead class_code">Class code: {{ classroom.classroom_id }}</p>
+        </div>
+    </div>
+    <input type="hidden" id="assignment_id" name="assignment_id">
+    <div class="contatiner_of_assignments">
+
+
+
+      <div class="col-lg-9">
+        <!-- ROW -->
+        <div class="row">
+
+            <div class="col-12 mb-2">
+                <div id = "clicked-post" class="card shadow-sm">
+                    <div class="card-body">
+                        <a  class = "text-decoration-none" href="#!">Share something with your class</a>
+                    </div>
+                </div>
+                <!-- TEXT AREA -->
+                <div class="container-fluid">
+                    <div class="card-body">
+                        <form action="{% url 'create_post' pk=classroom.id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="container">
+                                {{ post_form.title|attr:"class:form-control"|attr:"placeholder:Title"|attr:"rows:10"}}
+                            </div> <br>
+                            <div class="container">
+                                {{ post_form.description|attr:"class:form-control"|attr:"placeholder:Description"|attr:"rows:4"}}
+                            </div>
+                            <button type = "submit" class="btn btn-sm btn-primary m-1 pl-3 pr-3 float-right">
+                                Post
+                            </button>
+                            <button id = "cancel-post" class="btn btn-sm btn-outline-dark m-1 float-right">
+                                Cancel
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- END TEXT AREA -->
+                </div>
+                <!-- END COL -->
+                <!-- COL -->
+                {% for post in posts %}
+                <div class="col-lg-12">
+                  <!-- ROW -->
+                  <div class="row ">
+          
+                <div class="col-12 mb-2">
+                <div id = "clicked-post" class="card shadow-sm">
+                <div class="card-body">
+                      <div class="card-title">
+                          <h5>{{ post.title }} <br> 
+                           <h6>Posted by: <strong>{{ post.created_by }}</strong> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {% if post.created_by == user %}<a href="{% url 'delete_post' post_id=post.id %}">Delete</a> {% endif %}</h6>  
+                          <h6>Posted at: {{post.created_at}}[UTC 0]</h6>
+                      </div>
+                      <div class="card-main">
+                          {{post.description}}
+                      </div>
+
+
+                      <div class="card-body">
+                        <form  action="{% url 'create_comment' post.pk %}" method="post">
+                            <div class="input-group">
+                                {% csrf_token %}
+                                {{ comment_form.comment_text|attr:"class:form-control rounded-pill"|attr:"placeholder:Add a class comment" }}
+                                <div class="input-group-append">
+                                    <button class=" btn btn-circle" type="submit" id="button-addon2"><i class="fas fa-angle-double-right"></i>Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                      
+
+                    <div class="card-body">
+                        {% for comment in contents %}
+                            {% if comment.post == post %}
+                            <div class="d-flex flex-row">
+                                <p class='ml-2'><strong>{{ comment.user }}</strong>: {{ comment.comment_text}}</p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+              </div>
+                </div>
+                      </div>
+                  </div>
+              {% endfor %}
+      {% if assignments %}
+            {% for assignment in assignments %}
+                {% for teacher in teachers %}
+                    {% if teacher.teacher.id == user.id %}
+                        <a href="{% url 'assignment_summary' assignment_id=assignment.id %}">
+                    {% else %}
+                        <a href="{% url 'assignment_summary_std' assignment_id=assignment.id %}">
+                    {% endif %}
+                {% endfor %}
+                <div class="card assignment_card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">{{assignment.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Assignment posted on {{ assignment.posted_date }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Assignment due at {{ assignment.due_time }} on {{ assignment.due_date }}</h6>
+                </div>
+                </div>
+                </a> <br>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+    <div class="modal" tabindex="-1" id="submit_assignment">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Submit Assignment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+             <div class="modal-body">
+                  <form method="POST" class="cclass_form" id="submit_assignment_form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="file" id="myfile" name="myfile">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Assignment</button>
+                  </form> 
+             </div>
+          </div>
+        </div>
+      </div>
+    
+{% endblock %}

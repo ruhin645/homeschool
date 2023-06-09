@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Students</title>
+    <style>
+    h2{
+    margin-left: 100px;
+    }
+    body{
+   margin-top: 150px;
+  background: #468e91;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    }
+   label {
+    margin-top: 5px;
+  color: #020a0e;
+  font-weight: bold;
+  width: 130px;
+  float: left;
+
+}
+        .main{
+
+        width: 80%;
+  background: rgb(129, 165, 189);
+  border-radius: 6px;
+  padding: 20px 60px 30px 40px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        button{
+    background-color: #0b041b;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 20%;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    margin-top: 20px;
+    margin-left: 150px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+    </style>
+</head>
+
+<body>
+
+   <form method="post"> {% csrf_token %}
+       <div class="main">
+           <h2>Create Class</h2>
+           {{add_courses.as_p}}
+           <button type="submit">Create</button>
+       </div>
+
+
+   </form>
+</body>
+</html>

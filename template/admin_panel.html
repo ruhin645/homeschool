@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <style>
+
+        *{
+        margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: "Poppins" , sans-serif;
+        }
+        body{
+          background-image: url("/static/admin.jpg");
+          background-repeat: no-repeat;
+          background-size: 100%;
+        }
+    button{
+    background-color: #ff0000;
+    border: none;
+    width: 10%;
+    color: white;
+    text-align: center;
+    padding: 10px 15px;
+    margin: 5px 10px;
+    float: right;
+    font-size: 1rem;
+    cursor: pointer;
+
+}
+        .add{
+        background-color:rgb(87, 18, 177);
+        width: 200px;
+        height: 80px;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+        margin-left: 200px;
+        position: absolute;
+        top: 35%;
+        left: 30%;
+        }
+        .add a{
+            text-decoration: none;
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+        .view{
+        background-color:rgb(139, 20, 60);
+        width: 200px;
+        height: 80px;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        }
+        .view a{
+            text-decoration: none;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        </style>
+</head>
+<body>
+  <div class="logout">
+     <a href="http://localhost:8000/admin/logout/"><button>Logout</button></a>
+  </div>
+  <div class="add">
+    <a href="http://localhost:8000/signup/">Add User</a>
+  </div>
+  <!-- <div class="view">
+    <!-- <a href="/admin/users/user/">View User</a> -->
+  </div> -->
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Montserrat&family=Satisfy&display=swap" rel="stylesheet">
+ <style>
+     *{
+         margin: 0;
+         padding: 0;
+     }
+     .nav{
+         width: 100%;
+     }
+     .nav-menu{
+         width: 100%;
+     }
+     .nav-menu ul{
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         text-align: right;
+     }
+     .nav-menu li{
+         display: inline-block;
+
+     }
+     .nav-menu li a{
+         text-decoration: none;
+         color: rgb(160, 18, 18);
+         width: 100px;
+         display: block;
+         padding: 20px 15px;
+         text-transform: uppercase;
+         font-weight: bold;
+         font-family: arial;
+         text-align: center;
+         font-size: 17px;
+     }
+     .nav-menu a:hover{
+         background: #353640;
+     }
+    .back-img{
+        position: relative;
+         text-align: center;
+         color: black;
+    }
+     .back-img img{
+         height: 600px;
+         width: 1380px;   
+     }
+     .desc{
+    position: absolute;
+    top: 40%;
+    left: 48%;
+    color: blue;
+    font-size: 3rem;
+    font-family: 'Satisfy', 'cursive';
+     }
+ </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="nav-menu">
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/contact">Contact</a></li>
+            </ul>
+            
+        </div>
+    </div>
+    <div class="back-img">
+        {% load static %}
+     <img src="{% static 'home.jpg' %}" alt="Home">
+        <div class="desc">
+            Welcome to HomeSchool
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Teacher</title>
+    <style>
+       .hr-dot hr{
+            margin-left: -10px;
+            margin-right: -10px;
+            border-top: 0.5px solid rgb(207, 204, 204);
+        }
+        h2{
+            margin-left: 10px;
+            color: rgb(54, 54, 211);
+        }
+              [class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+
+        .nav-menu{
+            background-color: white;
+            display: flex;
+            justify-content: flex-end;
+        }
+       
+        .mybtn-active{
+                padding: 10px;
+                border: 2px solid rgb(5, 1, 17);
+                border-radius: 5px;
+                background-color:  rgb(54, 54, 211,0.9);
+                color: wheat;
+        }
+        .mybtn{
+            border: 2px solid rgb(5, 1, 17);
+            padding: 10px;
+            margin-left: 50px;
+                border-radius: 5px;
+                background-color:  rgb(54, 54, 211,0.9);
+                color: wheat;
+        }
+        .card{
+            text-align: center;
+            width: 300px;
+            height: 300px;
+            transition: 0.3s;
+            margin: 30px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+            background-color:rgb(243, 240, 236);
+
+        }
+        .card:hover{
+            box-shadow: 1px 7px 10px rgba(0, 0, 0, 0.3);;
+        }
+        .card-body{
+          width: 300px;
+          height: 130px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+
+            background-color: rgb(54, 54, 211);
+        }
+       .card .card-body .item{
+            color: white;
+            margin-left: 10px;
+          padding: 5px;
+        }
+        a{
+            text-decoration: none;
+
+            color: white;
+
+        }
+        .card-main{
+            width: 300px;
+            height: 120px;
+        }
+        .btn {
+  border: none;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+@media only screen and (min-width: 992px) {
+
+.col-lg-1 {
+    width: 8.33%;
+}
+
+.col-lg-2 {
+    width: 16.66%;
+}
+
+.col-lg-3 {
+    width: 25%;
+}
+
+.col-lg-4 {
+    width: 33.33%;
+}
+
+.col-lg-5 {
+    width: 41.66%;
+}
+
+.col-lg-6 {
+    width: 50%;
+}
+
+.col-lg-7 {
+    width: 58.33%;
+}
+
+.col-lg-8 {
+    width: 66.66%;
+}
+
+.col-lg-9 {
+    width: 75%;
+}
+
+.col-lg-10 {
+    width: 83.33%;
+}
+
+.col-lg-11 {
+    width: 91.66%;
+}
+
+.col-lg-12 {
+    width: 100%;
+}
+}
+
+       button{
+           border:1px solid black;
+           padding: 5px 8px;
+           border-radius: 8px;
+           cursor: pointer;
+           background-color:rgb(88, 39, 223);
+           color: white;
+       }
+       button:hover{
+        box-shadow: 0 0px 1px 1px rgb(70, 60, 58);
+       }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a class="navbar-brand" href="{% url 'home' %}" style="font-size:250% !important; color:#2e45c7 !important; margin-left: 1%; margin-right: 35%"><b>HomeSchool</b></a>
+    </div>
+    <div class="hr-dot">
+        <hr>
+    </div>
+    <h2>Welcome , {{request.user.username}}</h2>
+    {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == "success" %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% else %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+    <div class="nav-menu">
+        <a href="tdashboard/addclass" type="button" class="mybtn-active" style="text-decoration: none;">Create Class</a>
+        <a href="/todo/" type="button" class="mybtn" style="text-decoration: none;">To Do</a>
+        <a href="{% url 'logout' %}" type="button" class="mybtn" style="text-decoration: none;">Logout</a>
+       
+    </div>
+    {% for student in course %}
+        <div class="col-lg-3">
+
+        <div class="card">
+            <div class="card-body">
+                  <div class="item">
+                    <a href="{% url 'render_class' student.id %}"> <h4>{{student.course_name}}</h4></a>
+                    <a href="#">{{student.course_id}}</a><br/>
+                    <a href="#">{{student.course_sec}}</a><br/>
+                    <a href="#"> {{student.classroom_id}}</a><br/>
+
+                  </div>
+            </div>
+        <div class="card-main">
+
+        </div>
+        <hr>
+        <div class="card-footer">
+            <a href="{% url 'course_delete' student.slug %}"><button>Delete</button></a>
+        </div>
+        </div>
+      
+   </div>
+   {% endfor %}
+</body>
+
+</html>

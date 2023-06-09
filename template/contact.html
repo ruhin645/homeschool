@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <style>
+
+*{
+margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+body{
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  background: #c8e8e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container{
+  width: 40%;
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px 60px 30px 40px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container .content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content .contact-section .topic-text{
+  font-size: 23px;
+  font-weight: 600;
+  color: #3e2093;
+}
+
+.contact-section .input-box{
+  height: 50px;
+  width: 100%;
+  margin: 12px 0;
+}
+.contact-section .input-box input,
+.contact-section .input-box textarea{
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #F0F1F8;
+  border-radius: 6px;
+  padding: 0 15px;
+  resize: none;
+}
+.contact-section .message-box{
+  min-height: 110px;
+}
+.contact-section .input-box textarea{
+  padding-top: 6px;
+}
+
+button{
+    background-color: #3e2093;
+    border: none;
+    width: 20%;
+    color: white;
+    text-align: center;
+    padding: 5px 15px;
+    margin: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+
+}
+
+button:hover{
+    box-shadow: 0 2px 5px 3px #5029bc;
+}
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="content">
+          <div class="contact-section">
+            <div class="topic-text">Send us a message</div>
+          <form action="" method="post">
+            <p> {% csrf_token %} </p>
+            <div class="input-box">
+              <input type="text" name="full-name" placeholder="Enter your name">
+            </div>
+            <div class="input-box">
+              <input type="email" name="email" placeholder="Enter your email">
+            </div>
+            <div class="input-box message-box">
+              <textarea name="message" cols="30" rows="10" placeholder="Your message here"></textarea>
+            </div>
+            <button type="submit"><b>Send</b></button><br>
+          </form>
+        </div>
+        </div>
+      </div>
+
+</body>
+</html>
